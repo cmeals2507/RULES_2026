@@ -32,7 +32,7 @@ Instead of simple input–output pairs, training data will incorporate prompts, 
 
 * Stage 3, main process: 200 examples.
 
-We estimate the training cost at approximately $20, with analysis running up to $50, including multiple model runs due to rejected responses. Fine-tuning is likely to take 1–2 days, and each analysis stage will require 2–3 days at 3–4 hours of model work per day.
+We estimate the training cost at approximately 20 USD, with analysis running up to 50 USD, including multiple model runs due to rejected responses. Fine-tuning is likely to take 1–2 days, and each analysis stage will require 2–3 days at 3–4 hours of model work per day.
 
 Total training and analysis are expected to cost \~75.00 USD. 
 
