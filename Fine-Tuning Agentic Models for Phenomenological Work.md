@@ -8,7 +8,7 @@ Two training parameters will constrain the model’s behavior. First, setting th
 
 ## **Training**
 
-We plan to fine-tune a copy of Llama 3.3 70B, securely hosted on Microsoft Azure’s AI Foundry. This platform was selected for its zero data retention policy, which further supports the security and anonymity of participant data.
+We plan to fine-tune a copy of **Llama 3.3 70B** (Meta), an open-source, open-weight model that we will securely host on Microsoft Azure’s AI Foundry. This platform was selected for its zero data retention policy, which further supports the security and anonymity of participant data.
 
 Because the model will be used across all stages of analysis, we will employ multi-task fine-tuning. Training data will include task prefixes specifying the analysis stage, prepended to each entry. Aligned with our pilot methodology, we identify three sequential stages and one floating stage:
 
