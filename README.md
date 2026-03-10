@@ -18,6 +18,7 @@ This directory contains the Python scripts utilized to prep, transcribe, and phe
   
 ## 3. Fine-Tuning Plan
 - **`fine_tuning_plan.md`**: Methodology and workflow document outlining the next phase of the project — fine-tuning Llama 3.3 70B on Microsoft Azure AI Foundry for use in a multi-stage phenomenological analysis pipeline. Describes the methodological instruction tuning approach, training parameters, target training quantities across three sequential stages (holistic memoing and meaning unit identification, provisional themes and whole-part synthesis, cross-case synthesis) and one floating stage (self-evaluation through adversarial prompting), estimated costs, and stage-level deliverables.
+- **`sample-finetuning.jsonl`**: A sample file for model fine-tuning.
   
 ## 4. RULES 2026 Appendix
 - **`Online_Appendix.md`**: A supplementary document providing full transparency into the study's hybrid analytical process. It presents direct comparisons between human-coded analysis (holistic memos, meaning units, provisional themes, and whole-part synthesis) and machine-generated expansion outputs via GPT-5.2. Furthermore, it details the exact prompts, system instructions, and formatting directives utilized across all API phases to ensure methodological audibility.
