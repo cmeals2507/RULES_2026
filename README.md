@@ -1,7 +1,7 @@
 # LLM Phenomenology Analysis Scripts
 
 This directory contains the Python scripts utilized to prep, transcribe, and phenomenologically analyze the *Tell Us Your Story* interviews via the OpenAI API.
-> Note: All scripts have been cleaned to fully obscure participant internal IDs and directly identifiable text segments in adherence with our IRB and PII protections.
+> Note: All scripts have been cleaned to fully obscure participants' internal IDs and directly identifiable text segments, in accordance with PII protections.
 > 
 ## 1. Data Preparation
 - **`data_peek.py` & `data_peek2.py`**: Utility scripts intended to read qualitative data from the initial Qualtrics `.xlsx` export to identify which rows successfully logged linked audio recordings.
