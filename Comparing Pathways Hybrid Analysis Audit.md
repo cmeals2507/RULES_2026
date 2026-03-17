@@ -114,7 +114,7 @@ To accomplish this, the research team will qualitatively evaluate the outputs fr
 
    1. Outputs will be stripped of workflow data, so researchers see anonymized versions. This helps reduce bias toward a single type of analysis. 
 
-2. ### **Structured Evaluation Rubric**
+2. ### **Structured Evaluation Rubric (Phenomenological Fidelity Index *see below*)**
 
    1. Researchers will score each analysis extract using a common rubric. Proposed dimensions include:   
       1. Experiential grounding. Q: Is the analysis anchored in the participant’s account?  
