@@ -1,24 +1,52 @@
 # LLM Phenomenology Analysis Scripts
 
-This directory contains the Python scripts utilized to prep, transcribe, and phenomenologically analyze the *Tell Us Your Story* interviews via the OpenAI API.
-> Note: All scripts have been cleaned to fully obscure participants' internal IDs and directly identifiable text segments, in accordance with PII protections.
-> 
+This repository contains the Python scripts, methodology documents, and supplementary materials used to prepare, transcribe, and phenomenologically analyze the *Tell Us Your Story* interviews via the OpenAI API.
+
+> **Note:** All scripts have been cleaned to fully obscure participants' internal IDs and directly identifiable text segments, in accordance with PII protections.
+
+---
+
 ## 1. Data Preparation
-- **`data_peek.py` & `data_peek2.py`**: Utility scripts intended to read qualitative data from the initial Qualtrics `.xlsx` export to identify which rows successfully logged linked audio recordings.
-- **`transcribe.py`**: Batch processes raw `.m4a` audio files utilizing OpenAI's Whisper-1 model, producing raw `_transcript.txt` text files dynamically. 
-- **`add_headers.py`**: Extracts high school, college, and drum corps demographic survey metadata from the `.csv` sheet, calculates total performing years via regex logic on string subsets, and prepends this metadata to the top of each text file to ground the LLM's upcoming read of the transcripts.
-  
+
+- **`data_peek.py` & `data_peek2.py`**: Utility scripts for reading qualitative data from the initial Qualtrics `.xlsx` export to identify which rows successfully logged linked audio recordings.
+- **`transcribe.py`**: Batch processes raw `.m4a` audio files using OpenAI's Whisper-1 model, producing raw `_transcript.txt` text files dynamically.
+- **`add_headers.py`**: Extracts high school, college, and drum corps demographic survey metadata from the `.csv` sheet, calculates total performing years via regex logic on string subsets, and prepends this metadata to each transcript file to ground the LLM's read of the data.
+
+---
+
 ## 2. Analysis
-- **`analyze.py`**: The core API pipeline sequence for Phenomenological analysis modeling human phases.
-  - Phase 1 & 2: Holistic Reading & Meaning Unit Extraction (returns JSON)
-  - Phase 3 & 4: Interpretive Thematizing & Whole-Part Descriptions (returns JSON)
-  - Phase 5: Cross-Narrative Synthesis (Outputs final summary paragraph)
-- **`run_gpt52_expansion.py`**: Secondary extraction script targeting individual candidate transcripts. Used strictly GPT-5.2 (High-Reasoning effort) to produce "Candidate Analytic Memos", "Provisional Within-Case Summaries", and "Candidate Thematic Groupings" directly to Markdown arrays representing Post-Phase 2 and Post-Phase 4 API expansions. 
-- **`adversarial_probing_parallel.py`**: Code exploring multiple methodological lenses by tasking the system prompting to adopt different personas (Critical Discourse Analyst, Hermeneutic Phenomenologist, Organizational/Identity Theorist). Used on target segments through adversarial processes to minimize output drift and evaluate LLM perspectival shifts.
-  
-## 3. Fine-Tuning Plan
-- **`fine_tuning_plan.md`**: Methodology and workflow document outlining the next phase of the project — fine-tuning Llama 3.3 70B on Microsoft Azure AI Foundry for use in a multi-stage phenomenological analysis pipeline. Describes the methodological instruction tuning approach, training parameters, target training quantities across three sequential stages (holistic memoing and meaning unit identification, provisional themes and whole-part synthesis, cross-case synthesis) and one floating stage (self-evaluation through adversarial prompting), estimated costs, and stage-level deliverables.
-- **`sample-finetuning.jsonl`**: A sample file for model fine-tuning.
-  
-## 4. RULES 2026 Appendix
-- **`Online_Appendix.md`**: A supplementary document providing full transparency into the study's hybrid analytical process. It presents direct comparisons between human-coded analysis (holistic memos, meaning units, provisional themes, and whole-part synthesis) and machine-generated expansion outputs via GPT-5.2. Furthermore, it details the exact prompts, system instructions, and formatting directives utilized across all API phases to ensure methodological audibility.
+
+- **`analyze.py`**: The core API pipeline for phenomenological analysis, modeled on human analytic phases.
+  - Pass 1 → Phase 1 & 2: Holistic Reading & Meaning Unit Extraction (returns JSON)
+  - Pass 2 → Phase 3 & 4: Interpretive Thematizing & Whole-Part Descriptions (returns JSON)
+  - Pass 3 → Phase 5: Cross-Narrative Synthesis (outputs final summary paragraph)
+  - Saves results to `analysis_results.json`, `api_logs.json`, and `findings_paragraph.txt`
+- **`run_gpt52_expansion.py`**: Secondary extraction script targeting individual candidate transcripts using GPT-5.2 (high reasoning effort). Produces Candidate Analytic Memos, Provisional Within-Case Summaries, and Candidate Thematic Groupings in Markdown, representing Post-Phase 2 and Post-Phase 4 expansions.
+- **`adversarial_probing_parallel.py`**: Explores multiple methodological lenses by prompting the model to adopt different analytical personas (Critical Discourse Analyst, Hermeneutic Phenomenologist, Organizational/Identity Theorist). Used on targeted transcript segments to minimize output drift and evaluate LLM perspectival shifts through adversarial prompting.
+
+---
+
+## 3. Fine-Tuning
+
+- **`fine_tuning_plan.md`** *(also referenced as `Fine-Tuning Agentic Models for Phenomenological Work.md`)*: Methodology and workflow document for the next phase of the project — fine-tuning Llama 3.3 70B on Microsoft Azure AI Foundry for use in a multi-stage phenomenological analysis pipeline. Covers methodological instruction tuning approach, training parameters (temperature, weight decay), target training quantities across three sequential stages and one floating stage (self-evaluation via adversarial prompting), estimated costs (~$75 total), and stage-level deliverables.
+- **`sample_finetuning.jsonl`**: Annotated sample training data in JSONL format illustrating the input-output structure for fine-tuning, including chain-of-thought examples across meaning unit extraction and thematizing stages.
+
+---
+
+## 4. Methodology Documents
+
+- **`Comparing Pathways Hybrid Analysis Audit.md`**: Design document for a comparative study of three phenomenological analysis workflows (human-only, human-machine, machine-only) applied to the same transcript corpus. Describes the computational analysis approach (embedding-based semantic similarity, interpretive drift, trajectory alignment) and the structured human evaluation framework, including the Phenomenological Fidelity Index (PFI).
+- **`Online_Appendix.md`**: Supplementary document providing full transparency into the study's hybrid analytical process. Presents side-by-side comparisons of human-coded and GPT-5.2-generated outputs across all analytic stages (memos, meaning units, provisional themes, whole-part synthesis), along with the exact prompts and system instructions used at each API phase.
+
+---
+
+## 5. Output Files *(generated, not committed by default)*
+
+| File | Generated By | Contents |
+|---|---|---|
+| `analysis_results.json` | `analyze.py` | Individual analyses and cross-narrative synthesis |
+| `api_logs.json` | `analyze.py` | Timestamped logs of all API calls, prompts, and responses |
+| `findings_paragraph.txt` | `analyze.py` | Final cross-narrative synthesis paragraph |
+| `Post_Phase2_LLM_Expansion.md` | `run_gpt52_expansion.py` | Candidate memos and meaning units per transcript |
+| `Post_Phase4_LLM_Expansion.md` | `run_gpt52_expansion.py` | Within-case summaries and thematic groupings per transcript |
+| `*_transcript.txt` | `transcribe.py` | Raw transcripts with prepended metadata |
